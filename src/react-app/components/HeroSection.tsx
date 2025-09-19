@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, Star, Users, Sparkles, Zap, Shield } from 'lucide-react';
+import { ArrowRight, Heart, Star, Users, Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
   const handleWhatsApp = () => {

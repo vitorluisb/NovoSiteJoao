@@ -10,6 +10,11 @@ import {
   AdminLoginSchema 
 } from "@/shared/types";
 
+interface Env {
+  DB: any; // D1Database type from @cloudflare/workers-types
+  // Add your other environment variables here if needed
+}
+
 const app = new Hono<{ Bindings: Env; Variables: { adminUser: any } }>();
 
 app.use("*", cors({
@@ -142,7 +147,7 @@ app.get("/api/admin/love-messages", requireAuth, async (c) => {
     return c.json({ messages: results || [] });
   } catch (error) {
     console.error("Error fetching admin love messages:", error);
-    return c.json({ error: "Failed to fetch messages", details: error.message }, 500);
+    return c.json({ error: "Failed to fetch messages", details: error instanceof Error ? error.message : String(error) }, 500);
   }
 });
 
